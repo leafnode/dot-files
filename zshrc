@@ -51,7 +51,7 @@ autoload -U promptinit && promptinit
 
 # PS1="%n@%m:%~ %# "
 
-# vcs_info prompt
+zshrc_load_status 'vcs_info prompt'
 setopt prompt_subst
 autoload colors    
 colors             
@@ -169,9 +169,6 @@ function rprompt {
 
 rprompt '  ' $BR_BRIGHT_BLACK $PR_WHITE
 
-
-
-
 ################################################################################
 ## Aliases
 ################################################################################
@@ -193,7 +190,7 @@ fi
 alias e='vim'
 alias v='vim'
 alias vi='vim'
-alias gvim='gvim.gnome'
+# alias gvim='gvim.gnome'
 
 # ls
 
@@ -248,23 +245,6 @@ else
    alias poldek='poldek -v'
 fi
 
-# CVS
-
-if [ "$HOSTNAME" = "deith" ]
-then
-   export CVSROOT=':local:/var/lib/cvs'
-   alias cvsdeith='export CVSROOT=:local:/var/lib/cvs'
-else
-   export CVSROOT=':ext:leafnode@deith.dom.wafel.com:/var/lib/cvs'
-   alias cvsdeith='export CVSROOT=:ext:leafnode@deith.dom.wafel.com:/var/lib/cvs'
-fi
-
-alias cvsphp='export CVSROOT=:pserver:leszek@cvs.php.net:/repository'
-alias cvsfaq='export CVSROOT=:pserver:leszek@valis.faq.pl:/home/cvsroot'
-alias cvssf='export CVSROOT=:ext:leszek_k@cvs.sourceforge.net:/cvsroot/l-forum'
-alias cvspld='export CVSROOT=:pserver:leafnode@cvs.pld-linux.org:/cvsroot'
-alias cvsfiokware='export CVSROOT=:pserver:leafnode@fiokware.com:/home/cvsroot'
-
 
 ################################################################################
 ## Environment
@@ -276,14 +256,8 @@ export CONFIG_DIR='etc'
 export HOME_ETC="$HOME/$CONFIG_DIR"
 export HOSTNAME=`/bin/hostname`
 export CVS_RSH='ssh'
-export IRCSERVER='lublin.irc.pl'
-export IRCNICK='leafnode'
-export IRCNAME='Leszek Krupinski <leafnode@pld-linux.org>'
 export EDITOR='vim'
 export SCREENDIR="$HOME/tmp/screen"
-export NNTPSERVER='news.astercity.net'
-#export HTTP_PROXY='http://w3cache.aster.pl:8080/'
-#export FTP_PROXY='http://w3cache.aster.pl:8080/'
 export PATH="$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/games"
 path=($path $HOME/bin:/usr/local/bin)
 export HISTFILE="$HOME/.history"
@@ -370,17 +344,17 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' users resolve
 
 # ssh hosts
-#sshhosts=(deith eskel coen ubik chii.dorotka.net akane.fadesa.pl truskawa.wafel.com klempa@dosiu.ds.pg.gda.pl)
-#scphosts=(deith: eskel: coen: ubik: chii.dorotka.net: akane.fadesa.pl: truskawa.wafel.com:)
+#sshhosts=(xxx)
+#scphosts=(xxx: yyy:)
 #compctl -k sshhosts ssh
 #compctl -/ -f -k scphosts scp
 
 # ftp hosts
-# ftphosts=(ubik sunsite.icm.edu.pl ftp.pld-linux.org ftp.nest.pld-linux.org)
+# ftphosts=(sunsite.icm.edu.pl ftp.pld-linux.org ftp.nest.pld-linux.org)
 # compctl -k ftphosts ftp
 
 # www hosts
-# wwwhosts=(deith.wafel.com 7thguard.net)
+# wwwhosts=(www.xxx.pl www.yyy.pl)
 # compctl -k wwwhosts -/ -f -g '*.html(r)' lynx links glinks
 
 # cvs commands
@@ -515,4 +489,6 @@ setenv() { export $1=$2 }  # csh compatibility
 #    
 # }
 # 
-# 
+
+. ~/.zshrc_private
+
