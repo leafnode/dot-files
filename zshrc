@@ -413,9 +413,10 @@ bindkey "^[[6~" down-line-or-search
 
 zshrc_load_status 'setting up terminal'
 
-if [ "$TERM" = "xterm" ]; then
-  export TERM='linux'
-fi
+# if [ "$TERM" = "xterm" ]; then
+#   export TERM='linux'
+# fi
+
 if [ "$TERM" = "vt220" -o "$TERM" = "vt100" ]; then
   export TERM='xterm-color'
 fi
