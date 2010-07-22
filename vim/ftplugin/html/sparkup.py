@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-version = "0.1.2"
+version = "0.1.3"
 
 import os
 import fileinput
@@ -852,8 +852,8 @@ class Token:
         if len(attribs) > 0:
             for attrib in attribs:
                 try:    key, value = attrib.split('=', 1)
-                except: key, value = [attrib, '']
-            self.attributes[key] = value
+                except: key, value = attrib, ''
+                self.attributes[key] = value
 
         # Try looking for text
         text = None
