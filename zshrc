@@ -252,6 +252,7 @@ fi
 
 zshrc_load_status 'setting environment'
 
+export RUBYOPT=rubygems
 export CONFIG_DIR='etc'
 export HOME_ETC="$HOME/$CONFIG_DIR"
 export HOSTNAME=`/bin/hostname`
