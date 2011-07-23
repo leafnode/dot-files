@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# TODO: 
+# - opcje co by pakowaæ bzip2 lub gzip
+# - opcje co by ustalaæ format nazwy pliku wyj¶ciowego
+
+if [ $# -eq 0 ]
+then
+   echo "Usage: $0 <file/dir>"
+   exit 1
+fi
+
+if [ ! -e $1 ]
+then
+   echo "No such file or dir: $1"
+   exit 1
+fi
+
+if [ -d $1 ]
+then
+   tar -cvjf $1-`date +"%Y-%m-%d.%H-%M-%S"`.tar.bz2 $1
+elif [ -f $1 ]
+then
+   bzip2 $1
+   mv $1.bz2 $1-`date +"%Y-%m-%d.%H-%M-%S"`.bz2
+fi
+

@@ -1,0 +1,17 @@
+#!/usr/bin/python
+# -*- encoding: iso-8859-2 -*-
+
+import time
+import sys
+
+
+if len(sys.argv) == 1:
+    ts = int(raw_input("Podaj timestamp: "))
+else:
+    try:
+	ts = int(sys.argv[1])
+    except:
+	print "Z³e dane wej¶ciowe"
+	sys.exit(1)
+
+print time.ctime(ts)
