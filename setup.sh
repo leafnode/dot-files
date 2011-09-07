@@ -17,5 +17,5 @@ mkdir -p $HOME/bin
 for i in $ORG_DIR/bin/*
 do
    f=`basename $i`
-   ln -s $ORG_DIR/bin/$i $HOME/bin/$i
+   ln -s $ORG_DIR/bin/$f $HOME/bin/$f
 done
