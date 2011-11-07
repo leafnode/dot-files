@@ -194,7 +194,12 @@ alias vi='vim'
 
 # ls
 
-alias ls='ls --color=auto'
+if [ "x`uname`" = "xDarwin" ]
+then
+   alias ls='ls -G'
+else
+   alias ls='ls --color=auto'
+fi
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
@@ -307,8 +312,11 @@ zstyle ':completion:*:warnings' format $'%{\e[1;33m%}No matches for: %d%{\e[0m%}
 zstyle ':completion:*:corrections' format $'%{\e[1;33m%}%d (errors: %e)%{\e[0m%}'
 
 ## Kolorowe dopełnianie
-eval $(dircolors)
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+if [ "x`uname`" != "xDarwin" ]
+then
+   eval $(dircolors)
+   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
 
 ### Wybieranie dopełnienia za pomocą kursora
 #setopt menucomplete
