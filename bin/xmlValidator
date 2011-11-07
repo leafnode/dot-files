@@ -1,0 +1,44 @@
+#!/usr/bin/python
+
+import sys
+import os.path
+from xml.parsers.xmlproc import xmlproc
+
+def usage():
+    sys.stderr.write("Usage: %s <filename>\n" % sys.argv[0])
+
+if len(sys.argv) != 2:
+    usage()
+    sys.exit(1)
+
+if not os.path.isfile(sys.argv[1]):
+    sys.stderr.write("'%s' is not valid file\n" % sys.argv[1])
+    sys.exit(2)
+
+file = sys.argv[1]
+fatal_flag = False
+
+class ErrHandler(xmlproc.ErrorHandler):
+    def fatal(self, msg):
+	global fatal_flag
+	if msg.find('entity') == -1:
+	    print msg
+	    fatal_flag = True
+	    
+    def error(self, msg):
+	if not msg.find('entity'):
+	    print msg
+
+class MyApp(xmlproc.Application):
+    pass
+
+print 'Parsing...'
+p = xmlproc.XMLProcessor()
+p.set_application(MyApp())
+p.set_error_handler(ErrHandler(p))
+p.parse_resource(file)
+if fatal_flag:
+    print 'Fatal errors found.'
+    sys.exit(3)
+else:
+    print 'XML looks fine'

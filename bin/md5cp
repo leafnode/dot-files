@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ ! $# -eq 2 ]
+then
+   echo "Usage: $0 <file/dir>"
+   exit 1
+fi
+
+if [ -d "$1" ]
+then
+   find "$1" -type f -exec md5sum {} \;
+else
+   md5sum "$1"
+fi
+
+cp -aR "$1" "$2"
+
+if [ -d "$1" ]
+then
+   find "$2" -type f -exec md5sum {} \;
+elif [ -d "$2" ]
+then
+   md5sum "$2"/`basename "$1"`
+else
+   md5sum "$2"
+fi
+

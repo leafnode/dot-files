@@ -1,0 +1,20 @@
+#!/bin/sh
+
+. ~/.ujrc
+[ -z "$2" ] && exit 1
+r="$1"
+shift
+b=$(echo "$@" | sed -e "s/&/\&amp;/g" -e "s/\"/\&quot;/g" -e "s/`/\&apos;/g" -e "s/</\&lt;/g" -e "s/>/\&gt;/g" | iconv -f iso-8859-2 -t utf-8)
+(echo "<?xml version=\"1.0\" encoding=\"utf-8\"?><stream:stream to=\"${server}\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\">"
+sleep 1
+echo "<iq type=\"set\" id=\"auth\" to=\"${server}\"><query xmlns=\"jabber:iq:auth\"><username>${username}</username><password>${password}</password><resource>uj</resource></query></iq>"
+sleep 1
+echo "<message to=\"${r}\"><body>${b}</body></message>"
+sleep 1
+echo "</stream:stream>") | nc ${server} ${port}
+
+# Do pliku ~/.ujrc wpisujemy:
+# server=jabber.foo.pl
+# port=5222
+# username=jankowalski
+# password=mojetajnehas³o
