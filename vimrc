@@ -236,9 +236,13 @@ if has("syntax")
 
 endif
 
-au BufNewFile,BufRead *.inc set filetype=php
+autocmd BufNewFile,BufRead *.inc set filetype=php
+autocmd BufNewFile,BufRead *.twig set filetype=htmltwig
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
-au BufRead *.gpg %!gpg -d
+autocmd BufRead *.gpg %!gpg -d
 
 " Funkcje
 fun! ReadMan()
