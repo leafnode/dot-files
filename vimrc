@@ -1,16 +1,14 @@
-"    Id:  $Id: vimrc,v 1.6 2003/09/10 13:22:20 leon Exp $
-"  Date:  $Date: 2003/09/10 13:22:20 $
-" Autor:  Leszek Krupi?ski
+" Author: Leszek Krupiński
 " Email:  leafnode@pld-linux.org
 "
-" G??wny plik konfiguracyjny Vim
+" Main ViM config file
 "
 " Backup
 set backup
 set backupdir=~/tmp/backup
 set backupskip=/tmp/*,~/tmp
 
-" Kodowanie, j?zyk
+" Language, encoding
 " set language=polish
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -18,7 +16,7 @@ set fileencodings=utf-8,latin2
 " set fileencodings="ucs-bom,utf-8,default,iso-8859-2"
 set encoding=utf-8
 
-" Okna, terminal
+" Windows, terminal
 set ruler
 set showcmd
 set nottyfast
@@ -26,12 +24,14 @@ set splitbelow
 set scrolloff=10
 set laststatus=2
 set statusline=%1*[%n]\ %F\ %(%M%R%H)%)%=ASCII=%b\ \ HEX=%B\ \ Pos=[%l\,%c%V]\/[%L]\ %P
+" 256 color terminal
+set t_Co=256
 
-" Wklejanie
+" Pasting
 set nopaste
 set pastetoggle=<F12>
 
-" GUI, kolory, komunikaty
+" GUI, colors, messages
 set guifont=-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2
 set shortmess+=aI
 colorscheme leafnode
@@ -43,7 +43,7 @@ colorscheme leafnode
 "map <F5> :emenu <C-Z>
 "source $VIMRUNTIME/menu.vim
 
-" Ustawienia pod?wietlania/foldingu
+" Highlighting, folding, markers
 syntax on
 set foldmarker={{{,}}}
 let &foldmethod="marker"
@@ -53,14 +53,14 @@ let php_folding = 1
 let php_parent_error_close = 1
 let php_parent_error_open = 1
 
-" Wyszukiwanie, wzorce
+" Searching, patterns
 set magic
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
 
-" Wci?cia
+" Indenting
 set autoindent
 set cindent
 set expandtab
@@ -69,11 +69,11 @@ set softtabstop=3
 set textwidth=79
 set shiftwidth=3
 
-" Programowanie
+" Programming
 set number
 set showmatch
 
-" Inne
+" Misc
 filetype on
 filetype plugin on
 set modeline
@@ -92,10 +92,10 @@ endif
 
 " iabbrev dt <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 
-" Zewn?trzne pliki
+" External files
 source $VIMRUNTIME/macros/justify.vim
 
-" Mapowanie klawiszy
+" Key mapping
 
 nnoremap   M         :call ReadMan()<CR>
 nmap  J              :Justify tw<CR>
@@ -114,24 +114,40 @@ map   <C-o>          zo
 map   <C-c>          zc
 map   <silent><C-a>  :cn<CR>
 
+" Next/prev buffer
 map   <F2>           :bp!<CR>
 imap  <F2>           <ESC><F2><CR>
 map   <F3>           :bn!<CR>
 imap  <F3>           <ESC><F3><CR>
+
+" Close buffer
 map   <F4>           :bdel<CR>
 imap  <F4>           <ESC><F4><CR>
 map   <F9>           :silent make<BAR>cwindow 8<CR>:redraw!<CR>
 imap  <F9>           <ESC><F9>
 
+" Toggle line numbers
 nmap  <S-F2>         :set nonumber<CR>
 imap  <S-F2>         <ESC><S-F2>i
 nmap  <S-F3>         :set number<CR>
 imap  <S-F3>         <ESC><S-F3>i
 
+" Lineup
 vmap  L              !lineUp.py<CR>
+
+" Comment-out lines
 vmap  <F5>           :s/^/# /<CR>:noh<CR>
+
+" Insert line
 imap  <F5>           <CR>################################################################################<CR>
 nmap  <F5>           i<F5><ESC>
+
+" Spellcheck
+map <F8> <Esc>:setlocal spell spelllang=pl_PL<CR>
+map <F9> <Esc>:setlocal nospell<CR>
+
+" NerdTree
+nmap <silent> <leader>p :NERDTreeToggle<CR>
 
 " FuzzyFinder
 let g:fuf_modesDisable = []
@@ -179,7 +195,7 @@ nnoremap <silent> se     :FufEditDataFile<CR>
 nnoremap <silent> sr     :FufRenewCache<CR>
 
 
-" Klawisze S-F
+" S-F key mapping
 map <ESC>[23~ <S-F1>
 map <ESC>[24~ <S-F2>
 map <ESC>[25~ <S-F3>
@@ -193,7 +209,7 @@ map <ESC>[34~ <S-F10>
 map <ESC>[23$ <S-F11> 
 map <ESC>[24$ <S-F12> 
 
-" Polecenia zale?ne od typu pliku
+" Filetype dependant commands
 if has("autocmd")
    augroup cprog
       set number
@@ -238,13 +254,14 @@ endif
 
 autocmd BufNewFile,BufRead *.inc set filetype=php
 autocmd BufNewFile,BufRead *.twig set filetype=htmltwig
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 autocmd BufRead *.gpg %!gpg -d
 
-" Funkcje
+" Functions
 fun! ReadMan()
 
     let s:man_word = expand('<cword>')
@@ -284,5 +301,17 @@ fun! ReadMan()
     setl ft=man nomod bufhidden=hide nobuflisted
 
 endfun
+
+" Scratch buffer
+function! ToggleScratch()
+   if expand('%') == g:ScratchBufferName
+      quit
+   else
+      Sscratch
+   endif
+endfunction
+
+map <leader>s :call ToggleScratch()<CR>
+
 
 hi Spell ctermfg=Red

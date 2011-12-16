@@ -1,8 +1,7 @@
 " Vim syntax file
-" Language:	CVS annotate output
+" Language:	HG annotate output
 " Maintainer:	Bob Hiestand <bob.hiestand@gmail.com>
-" Remark:	Used by the cvscommand plugin.  Originally written by Mathieu
-" Clabaut
+" Remark:	Used by the vcscommand plugin.
 " License:
 " Copyright (c) Bob Hiestand
 "
@@ -24,22 +23,18 @@
 " FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 " IN THE SOFTWARE.
 
-if version < 600
-	syntax clear
-elseif exists("b:current_syntax")
+if exists("b:current_syntax")
 	finish
 endif
 
-syn match cvsDate 	/\d\d-...-\d\d/ 		contained
-syn match cvsName  	/(\S* /hs=s+1,he=e-1 		contained nextgroup=cvsDate
-syn match cvsVer 	/^\d\+\(\.\d\+\)\+/ 		contained nextgroup=cvsName
-syn region cvsHead 	start="^\d\+\.\d\+" end="):" 	contains=cvsVer,cvsName,cvsDate
+syn match hgVer /\d\+/ contained
+syn match hgName /^\s*\S\+/ contained
+syn match hgHead /^\s*\S\+\s\+\d\+:/ contains=hgVer,hgName
 
-if !exists("did_cvsannotate_syntax_inits")
-	let did_cvsannotate_syntax_inits = 1
-	hi link cvsDate 	Comment
-	hi link cvsName	Type
-	hi link cvsVer	Statement
+if !exists("did_hgannotate_syntax_inits")
+	let did_hgannotate_syntax_inits = 1
+	hi link hgName Type
+	hi link hgVer Statement
 endif
 
-let b:current_syntax="CVSAnnotate"
+let b:current_syntax="hgAnnotate"
