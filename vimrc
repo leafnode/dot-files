@@ -194,6 +194,9 @@ nnoremap <silent> sh     :FufHelp<CR>
 nnoremap <silent> se     :FufEditDataFile<CR>
 nnoremap <silent> sr     :FufRenewCache<CR>
 
+" Ctrl-p
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.git/*,.svn/*
 
 " S-F key mapping
 map <ESC>[23~ <S-F1>
