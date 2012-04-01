@@ -1,6 +1,24 @@
 " Author: Leszek Krupiński
 " Email:  leafnode@pld-linux.org
-"
+
+" Included plugins:
+" NERDTree
+" NERDCommenter
+" FuzzyFinder
+" Ack
+" gist
+" scratch
+" runthisprog
+" snipMate
+" supertab
+" surround
+" VCS
+" searchfold
+" syntastic
+" taglist
+" conqueTerm
+" ctrlp
+
 " Main ViM config file
 "
 " Backup
@@ -86,6 +104,7 @@ let mapleader = "\\"
 "    set t_@7=[8~
 " endif
 
+" Backspace fix
 if &term == "rxvt" || &term == "screen"
    set t_kb=
 endif
@@ -132,8 +151,13 @@ imap  <S-F2>         <ESC><S-F2>i
 nmap  <S-F3>         :set number<CR>
 imap  <S-F3>         <ESC><S-F3>i
 
-" Lineup
-vmap  L              !lineUp.py<CR>
+" Lineup - replaced by align.vim
+"vmap  L              !lineUp.py<CR>
+
+" CTags
+" map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader>rt :!ctags *<CR><CR>
+map <C-\> :tnext<CR>
 
 " Comment-out lines
 vmap  <F5>           :s/^/# /<CR>:noh<CR>
@@ -146,13 +170,38 @@ nmap  <F5>           i<F5><ESC>
 map <F8> <Esc>:setlocal spell spelllang=pl_PL<CR>
 map <F9> <Esc>:setlocal nospell<CR>
 
+" gist-vim defaults
+if has("mac")
+  let g:gist_clip_command = 'pbcopy'
+elseif has("unix")
+  let g:gist_clip_command = 'xclip -selection clipboard'
+endif
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+
 " NerdTree
 nmap <silent> <leader>p :NERDTreeToggle<CR>
+
+" SparkUp
+let g:sparkupNextMapping = '<Leader>en'
+let g:sparkupExecuteMapping = '<Leader>ee'
+
+" MacVIM shift+arrow-keys behavior (required in .vimrc)
+" let macvim_hig_shift_movement = 1
+
+" Inserts the path of the currently edited file into a command
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+" Enable syntastic syntax checking
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=1
 
 " FuzzyFinder
 let g:fuf_modesDisable = []
 let g:fuf_mrufile_maxItem = 400
 let g:fuf_mrucmd_maxItem = 400
+
 nnoremap <silent> sj     :FufBuffer<CR>
 nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
 nnoremap <silent> sK     :FufFileWithFullCwd<CR>

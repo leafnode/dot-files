@@ -142,6 +142,8 @@ zstyle ':vcs_info:*:prompt:*' stagedstr '²'    # display ² if there are staged
 zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}//" "${FMT_PATH}"
 zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"              "${FMT_PATH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"
+zstyle ':vcs_info:(hg*|git*):*' get-revision true
+zstyle ':vcs_info:(hg*|git*):*' check-for-changes true
 
 
 function precmd {
@@ -265,7 +267,7 @@ export HOSTNAME=`/bin/hostname`
 export CVS_RSH='ssh'
 export EDITOR='vim'
 export SCREENDIR="$HOME/tmp/screen"
-export PATH="$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/games"
+export PATH="/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
 path=($path $HOME/bin:/usr/local/bin)
 export HISTFILE="$HOME/.history"
 export HISTSIZE="10000"

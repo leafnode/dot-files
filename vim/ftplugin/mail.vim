@@ -6,9 +6,9 @@
 iabbrev sie siê
 iabbrev nei nie
 
-set nocindent
-set noautoindent
-set noshowmatch
+setlocal nocindent
+setlocal noautoindent
+setlocal noshowmatch
 
 silent! 1,/^$/s/Subject: \(Re: \|Odp: \)\+/Subject: Re: /
 setlocal tw=65 
