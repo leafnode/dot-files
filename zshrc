@@ -278,21 +278,21 @@ export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 ## Locale
 ################################################################################
 
-zshrc_load_status 'setting locale'
-
-export LC_MESSAGES=C
-
-if [ "x$LANG" = "x" ]
-then
-   unset LC_ALL
-   export LC_CTYPE=pl_PL
-   export LC_TIME=pl_PL
-   export LC_MONETARY=pl_PL
-   export LC_MEASUREMENT=pl_PL
-   export LC_MESSAGES=C
-   export LANGUAGE=pl
-   export LANG=pl_PL
-fi
+# zshrc_load_status 'setting locale'
+# 
+# export LC_MESSAGES=C
+# 
+# if [ "x$LANG" = "x" ]
+# then
+#    unset LC_ALL
+#    export LC_CTYPE=pl_PL
+#    export LC_TIME=pl_PL
+#    export LC_MONETARY=pl_PL
+#    export LC_MEASUREMENT=pl_PL
+#    export LC_MESSAGES=C
+#    export LANGUAGE=pl
+#    export LANG=pl_PL
+# fi
 
 ################################################################################
 ## Completion
