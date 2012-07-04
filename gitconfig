@@ -1,0 +1,11 @@
+[color]
+	ui = true
+	diff = true
+	branch = true
+	interactive = true
+	status = true
+[core]
+	autocrlf = input
+[user]
+	email = leafnode@gmail.com
+	name = Leszek Krupiński
