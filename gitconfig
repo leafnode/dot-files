@@ -1,3 +1,6 @@
+[user]
+	name = Leszek Krupiński
+	email = leafnode@gmail.com
 [color]
 	ui = true
 	diff = true
@@ -6,6 +9,7 @@
 	status = true
 [core]
 	autocrlf = input
-[user]
-	email = leafnode@gmail.com
-	name = Leszek Krupiński
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	simplelog = log --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
