@@ -10,6 +10,9 @@
 [core]
 	autocrlf = input
 	excludesfile = /Users/leafnode/.gitignore_global
+[github]
+	user = leafnode
+
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	simplelog = log --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
