@@ -1,6 +1,6 @@
 set guifont="DejaVu Sans Mono 8"
 set number
-colorscheme molokai
+colorscheme Monokai
 
 if has("gui_macvim")
    " Command-/ to toggle comments

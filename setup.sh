@@ -2,7 +2,7 @@
 
 ORG_DIR=`pwd`
 
-for i in zshrc vimrc vim gvimrc screenrc tmux.conf gitconfig
+for i in zshrc vimrc vim gvimrc screenrc tmux.conf gitconfig irssi
 do
    rm -r -f $HOME/.$i
    ln -s $ORG_DIR/$i $HOME/.$i
