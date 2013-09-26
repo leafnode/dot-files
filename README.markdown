@@ -58,6 +58,7 @@ issues with color files, but that's something different.
 * [javascript](https://github.com/pangloss/vim-javascript) - javascript syntax
 * runthisprog (authorship unknown; it might have been be written by me, but I'm
   not sure)
+* [scss-syntax.vim](https://github.com/cakebaker/scss-syntax.vim) - scss syntax
 
 = To do
 
