@@ -268,7 +268,7 @@ export HOSTNAME=`/bin/hostname`
 export CVS_RSH='ssh'
 export EDITOR='vim'
 export SCREENDIR="$HOME/tmp/screen"
-export PATH="/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
+export PATH="$HOME/bin:/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
 path=($path $HOME/bin:/usr/local/bin)
 export HISTFILE="$HOME/.history"
 export HISTSIZE="10000"
@@ -427,6 +427,9 @@ bindkey "^[^[[3~" delete-word		# aterm
 
 bindkey "^[[5~" up-line-or-search
 bindkey "^[[6~" down-line-or-search
+
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
 
 # terminal settings
 
