@@ -401,47 +401,76 @@ zstyle ':completion:*' users resolve
 ## Bindings
 ################################################################################
 
+zshrc_load_status 'setting up keymappings'
+
+typeset -A key
+
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+
 zshrc_load_status 'setting up bindings'
 
-bindkey "^[[3~"   delete-char		# xterm
-bindkey "^[[1~"   beginning-of-line	# Linux console
-bindkey "^[OH"    beginning-of-line	# xterm
-bindkey "^[[H"    beginning-of-line	# xterm
-bindkey "^[[4~"   end-of-line		# Linux console
-bindkey "^[OF"    end-of-line		# xterm
-bindkey "^[[F"    end-of-line		# xterm
+
+[[ -n "${key[Home]}"     ]] && bindkey "$key[Home]"     beginning-of-line
+[[ -n "${key[End]}"      ]] && bindkey "$key[End]"      end-of-line
+[[ -n "${key[Insert]}"   ]] && bindkey "$key[Insert]"   overwrite-mode
+[[ -n "${key[Delete]}"   ]] && bindkey "$key[Delete]"   delete-char
+[[ -n "${key[Left]}"     ]] && bindkey "$key[Left]"     backward-char
+[[ -n "${key[Right]}"    ]] && bindkey "$key[Right]"    forward-char
+[[ -n "${key[Up]}"       ]] && bindkey "$key[Up]"       history-beginning-search-backward
+[[ -n "${key[Down]}"     ]] && bindkey "$key[Down]"     history-beginning-search-forward
+[[ -n "${key[PageUp]}"   ]] && bindkey "$key[PageUp]"   up-line-or-search
+[[ -n "${key[PageDown]}" ]] && bindkey "$key[PageDown]" down-line-or-search
+
+bindkey ' ' magic-space    # also do history expansion on space
+
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+bindkey '^[[Z' reverse-menu-complete
+
+# Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
+bindkey '^?' backward-delete-char
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+bindkey "\e[3~" delete-char
+
 bindkey "\M\b" 	  backward-delete-word	# xterm
 bindkey "^[[5D"   backward-word		# xterm
 bindkey "^[[5C"   forward-word		# xterm
 bindkey "˙"	  backward-delete-word	# xterm (silly)
 bindkey "^[[3;3~" delete-word           # xterm
-bindkey "^[[1;5D" backward-word		# xterm XFree86 4.3
-bindkey "^[[1;5C" forward-word		# xterm XFree86 4.3
-bindkey "^[O5D"   backward-word		# screen
-bindkey "^[O5C"   forward-word		# screen
-bindkey "^[[7~"	  beginning-of-line	# aterm
-bindkey "^[[8~"	  end-of-line		# aterm
-bindkey "^[Od"	  backward-word		# aterm
-bindkey "^[Oc"	  forward-word		# aterm
 bindkey "^[^[[3~" delete-word		# aterm
 
-bindkey "^[[5~" up-line-or-search
-bindkey "^[[6~" down-line-or-search
-
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
+bindkey "^[^[[3~" delete-word		# aterm
+bindkey "^[O5D"   backward-word		# screen
+bindkey "^[O5C"   forward-word		# screen
+bindkey "^[Od"	  backward-word		# aterm
+bindkey "^[Oc"	  forward-word		# aterm
+bindkey "^[[D"	  backward-word
+bindkey "^[[C"	  forward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # terminal settings
 
-zshrc_load_status 'setting up terminal'
+#zshrc_load_status 'setting up terminal'
 
 # if [ "$TERM" = "xterm" ]; then
 #   export TERM='linux'
 # fi
 
-if [ "$TERM" = "vt220" -o "$TERM" = "vt100" ]; then
-  export TERM='xterm-color'
-fi
+#if [ "$TERM" = "vt220" -o "$TERM" = "vt100" ]; then
+#  export TERM='xterm-color'
+#fi
 
 zshrc_load_status 'setting up limits'
 
