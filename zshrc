@@ -430,6 +430,9 @@ zshrc_load_status 'setting up bindings'
 [[ -n "${key[PageUp]}"   ]] && bindkey "$key[PageUp]"   up-line-or-search
 [[ -n "${key[PageDown]}" ]] && bindkey "$key[PageDown]" down-line-or-search
 
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
 bindkey ' ' magic-space    # also do history expansion on space
 
 bindkey '^[[A' history-beginning-search-backward
