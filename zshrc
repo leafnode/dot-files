@@ -430,9 +430,6 @@ zshrc_load_status 'setting up bindings'
 [[ -n "${key[PageUp]}"   ]] && bindkey "$key[PageUp]"   up-line-or-search
 [[ -n "${key[PageDown]}" ]] && bindkey "$key[PageDown]" down-line-or-search
 
-bindkey '^[[1~' beginning-of-line
-bindkey '^[[4~' end-of-line
-
 bindkey ' ' magic-space    # also do history expansion on space
 
 bindkey '^[[A' history-beginning-search-backward
@@ -458,8 +455,22 @@ bindkey "^[O5D"   backward-word		# screen
 bindkey "^[O5C"   forward-word		# screen
 bindkey "^[Od"	  backward-word		# aterm
 bindkey "^[Oc"	  forward-word		# aterm
-bindkey "^[[D"	  backward-word
-bindkey "^[[C"	  forward-word
+
+bindkey "^[[1~"   beginning-of-line    # Linux console
+bindkey "^[OH"    beginning-of-line    # xterm
+bindkey "^[[H"    beginning-of-line    # xterm
+bindkey "^[[4~"   end-of-line          # Linux console
+bindkey "^[OF"    end-of-line          # xterm
+bindkey "^[[F"    end-of-line          # xterm
+bindkey "^[[7~"          beginning-of-line     # aterm
+bindkey "^[[8~"          end-of-line           # aterm
+
+if [ "x`uname`" != "xDarwin" ]
+then
+   bindkey "^[[D"	  backward-word
+   bindkey "^[[C"	  forward-word
+fi
+
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
