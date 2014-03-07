@@ -465,12 +465,12 @@ bindkey "^[[F"    end-of-line          # xterm
 bindkey "^[[7~"          beginning-of-line     # aterm
 bindkey "^[[8~"          end-of-line           # aterm
 
-if [ "x`uname`" != "xDarwin" ]
-then
-   bindkey "^[[D"	  backward-word
-   bindkey "^[[C"	  forward-word
-fi
-
+# if [ "x`uname`" != "xDarwin" ]
+# then
+#    bindkey "^[[D"	  backward-word
+#    bindkey "^[[C"	  forward-word
+# fi
+# 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
