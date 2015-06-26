@@ -29,6 +29,7 @@
         flc = log -u -1
         dlc = diff --cached HEAD^
         dr  = "!f() { git diff "$1"^.."$1"; }; f"
+        lr  = "!f() { git log "$1"^.."$1"; }; f"
         lc  = "!f() { git ll "$1"^.."$1"; }; f"
         diffr  = "!f() { git diff "$1"^.."$1"; }; f"
         f = "!git ls-files | grep -i"
@@ -75,10 +76,19 @@
         sa = stash apply
         ss = stash save
 
+        pull-all = !"for b in $(git for-each-ref refs/heads --format='%(refname)') ; do git checkout ${b#refs/heads/} ; git pull --ff-only ; done"
+
+        ignored = !git ls-files -v | grep "^[[:lower:]]"
+
 
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
