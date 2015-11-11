@@ -39,7 +39,6 @@ zshrc_load_status () {
 zshrc_load_status 'setting prompt'
 
 PS1="%{`tput setaf 2`%}%n%{`tput setaf 6`%}@%{`tput setaf 5`%}%m%{`tput setaf 2`%}:%{`tput setaf 6`%}%~ %\:>%{`tput setaf 9`%} "
-
 unset RPS1
 
 autoload -U promptinit && promptinit
@@ -211,6 +210,14 @@ alias lla='ls -la'
 
 alias man='pinfo -m'
 alias info='pinfo'
+
+# pygments-colored cat
+if [ -x `which pygmentize` ]
+then
+   alias ccat='pygmentize'
+else
+   alias ccat='cat'
+fi
 
 # mounting
 
@@ -555,6 +562,11 @@ setenv() { export $1=$2 }  # csh compatibility
 #    
 # }
 # 
+
+if [ -f /etc/profile.d/rvm.sh ]
+then
+   source /etc/profile.d/rvm.sh
+fi
 
 . ~/.zshrc_private
 
