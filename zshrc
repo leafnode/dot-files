@@ -443,6 +443,7 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
 bindkey '^[[Z' reverse-menu-complete
+bindkey "^R" history-incremental-search-backward
 
 # Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
 bindkey '^?' backward-delete-char
