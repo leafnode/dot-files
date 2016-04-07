@@ -212,7 +212,9 @@ alias man='pinfo -m'
 alias info='pinfo'
 
 # pygments-colored cat
-if [ -x `which pygmentize` ]
+which pygmentize > /dev/null
+
+if [ $? -eq 0 ]
 then
    alias ccat='pygmentize'
 else
@@ -269,6 +271,7 @@ fi
 zshrc_load_status 'setting environment'
 
 export RUBYOPT=rubygems
+export MOSH_TITLE_NOPREFIX=1
 export CONFIG_DIR='etc'
 export HOME_ETC="$HOME/$CONFIG_DIR"
 export HOSTNAME=`/bin/hostname`
@@ -570,4 +573,3 @@ then
 fi
 
 . ~/.zshrc_private
-
