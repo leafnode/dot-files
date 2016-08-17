@@ -16,3 +16,15 @@ do
    f=`basename $i`
    ln -s $ORG_DIR/bin/$f $HOME/bin/$f
 done
+
+mkdir -p ~/tmp/backup
+mkdir -p ~/tmp/screen
+chmod 0700 ~/tmp/screen
+
+which ctags > /dev/null
+
+if [ $? -ne 0 ]
+then
+   echo "NO CTAGS INSTALLED"
+fi
+

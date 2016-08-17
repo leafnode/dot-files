@@ -39,7 +39,6 @@ zshrc_load_status () {
 zshrc_load_status 'setting prompt'
 
 PS1="%{`tput setaf 2`%}%n%{`tput setaf 6`%}@%{`tput setaf 5`%}%m%{`tput setaf 2`%}:%{`tput setaf 6`%}%~ %\:>%{`tput setaf 9`%} "
-
 unset RPS1
 
 autoload -U promptinit && promptinit
@@ -212,6 +211,16 @@ alias lla='ls -la'
 alias man='pinfo -m'
 alias info='pinfo'
 
+# pygments-colored cat
+which pygmentize > /dev/null
+
+if [ $? -eq 0 ]
+then
+   alias ccat='pygmentize'
+else
+   alias ccat='cat'
+fi
+
 # mounting
 
 # alias c+='mount /dev/cdrom'
@@ -262,6 +271,7 @@ fi
 zshrc_load_status 'setting environment'
 
 export RUBYOPT=rubygems
+export MOSH_TITLE_NOPREFIX=1
 export CONFIG_DIR='etc'
 export HOME_ETC="$HOME/$CONFIG_DIR"
 export HOSTNAME=`/bin/hostname`
@@ -436,6 +446,7 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
 bindkey '^[[Z' reverse-menu-complete
+bindkey "^R" history-incremental-search-backward
 
 # Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
 bindkey '^?' backward-delete-char
@@ -556,5 +567,9 @@ setenv() { export $1=$2 }  # csh compatibility
 # }
 # 
 
-. ~/.zshrc_private
+if [ -f /etc/profile.d/rvm.sh ]
+then
+   source /etc/profile.d/rvm.sh
+fi
 
+. ~/.zshrc_private
