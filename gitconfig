@@ -95,5 +95,5 @@
 	trustExitCode = true
 [push]
 	default = simple
-#[credential]
-#	helper = osxkeychain
+[credential]
+	helper = cache
