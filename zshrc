@@ -254,16 +254,6 @@ alias hnb='hnb.lock'
 alias grep='grep --color=auto'
 #alias screen='screen -U'
 
-# poldek
-
-if [ "$HOSTNAME" = "ubik" -o "$HOSTNAME" = "server" ]
-then
-   alias poldek='poldek -v --sn ra-i686 --sn ra-i686-sec --sn ra-i686-gen'
-else
-   alias poldek='poldek -v'
-fi
-
-
 ################################################################################
 ## Environment
 ################################################################################
@@ -484,6 +474,11 @@ bindkey "^[[8~"          end-of-line           # aterm
 # 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# os x
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+
 
 # terminal settings
 
