@@ -283,6 +283,8 @@ zshrc_load_status 'setting locale'
 
 #export LC_MESSAGES=C
 
+export LANG=en_US.UTF-8
+
 if [ "x$LANG" = "x" ]
 then
 #    unset LC_ALL
