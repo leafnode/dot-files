@@ -47,6 +47,7 @@
         lt = describe --tags --abbrev=0
         ours = "!f() { git co --ours $@ && git add $@; }; f"
         theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+        backup = "!git archive --format zip -o $(git rev-parse --show-toplevel | sed -e 's#/.*/##')-$(git rev-parse --abbrev-ref HEAD)-$(date +"%Y-%m-%d.%H-%M-%S").zip $(git rev-parse --abbrev-ref HEAD)"
 
         # shortcuts
         cp = cherry-pick
@@ -92,3 +93,7 @@
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+[push]
+	default = simple
+[credential]
+	helper = cache

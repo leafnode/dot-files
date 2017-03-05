@@ -253,16 +253,6 @@ alias hnb='hnb.lock'
 alias grep='grep --color=auto'
 #alias screen='screen -U'
 
-# poldek
-
-if [ "$HOSTNAME" = "ubik" -o "$HOSTNAME" = "server" ]
-then
-   alias poldek='poldek -v --sn ra-i686 --sn ra-i686-sec --sn ra-i686-gen'
-else
-   alias poldek='poldek -v'
-fi
-
-
 ################################################################################
 ## Environment
 ################################################################################
@@ -270,6 +260,7 @@ fi
 zshrc_load_status 'setting environment'
 
 export RUBYOPT=rubygems
+export MOSH_TITLE_NOPREFIX=1
 export CONFIG_DIR='etc'
 export HOME_ETC="$HOME/$CONFIG_DIR"
 export HOSTNAME=`/bin/hostname`
@@ -483,6 +474,11 @@ bindkey "^[[8~"          end-of-line           # aterm
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# os x
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+
+
 # terminal settings
 
 #zshrc_load_status 'setting up terminal'
@@ -571,4 +567,3 @@ then
 fi
 
 . ~/.zshrc_private
-
