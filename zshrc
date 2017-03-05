@@ -212,11 +212,10 @@ alias man='pinfo -m'
 alias info='pinfo'
 
 # pygments-colored cat
-which pygmentize > /dev/null
-
+pygmentize=`which pygmentize`
 if [ $? -eq 0 ]
 then
-   alias ccat='pygmentize'
+   alias ccat=$pygmentize
 else
    alias ccat='cat'
 fi
