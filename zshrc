@@ -212,11 +212,10 @@ alias man='pinfo -m'
 alias info='pinfo'
 
 # pygments-colored cat
-which pygmentize > /dev/null
-
+pygmentize=`which pygmentize`
 if [ $? -eq 0 ]
 then
-   alias ccat='pygmentize'
+   alias ccat=$pygmentize
 else
    alias ccat='cat'
 fi
@@ -254,16 +253,6 @@ alias hnb='hnb.lock'
 alias grep='grep --color=auto'
 #alias screen='screen -U'
 
-# poldek
-
-if [ "$HOSTNAME" = "ubik" -o "$HOSTNAME" = "server" ]
-then
-   alias poldek='poldek -v --sn ra-i686 --sn ra-i686-sec --sn ra-i686-gen'
-else
-   alias poldek='poldek -v'
-fi
-
-
 ################################################################################
 ## Environment
 ################################################################################
@@ -292,6 +281,8 @@ export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 zshrc_load_status 'setting locale'
 
 #export LC_MESSAGES=C
+
+export LANG=en_US.UTF-8
 
 if [ "x$LANG" = "x" ]
 then
@@ -484,6 +475,11 @@ bindkey "^[[8~"          end-of-line           # aterm
 # 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# os x
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+
 
 # terminal settings
 
