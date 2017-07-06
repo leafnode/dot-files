@@ -35,6 +35,7 @@
         f = "!git ls-files | grep -i"
         grep = grep -Ii
         gr = grep -Ii
+        sync = "!f() { git fetch $1; git merge --ff-only $1/$2; }; f"
         gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
         la = "!git config -l | grep alias | cut -c 7-"
         done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
