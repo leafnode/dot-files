@@ -49,6 +49,7 @@
         ours = "!f() { git co --ours $@ && git add $@; }; f"
         theirs = "!f() { git co --theirs $@ && git add $@; }; f"
         backup = "!git archive --format zip -o $(git rev-parse --show-toplevel | sed -e 's#/.*/##')-$(git rev-parse --abbrev-ref HEAD)-$(date +"%Y-%m-%d.%H-%M-%S").zip $(git rev-parse --abbrev-ref HEAD)"
+        sync = "!f() { git fetch $1; git merge --ff-only $1/$2; }; f"
 
         # shortcuts
         cp = cherry-pick
