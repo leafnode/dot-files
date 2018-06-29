@@ -10,6 +10,9 @@
 [core]
 	autocrlf = input
 	excludesfile = /Users/leafnode/.gitignore_global
+        editor = vim
+[receive]
+        denyCurrentBranch = warn
 [github]
 	user = leafnode
 
@@ -49,7 +52,8 @@
         ours = "!f() { git co --ours $@ && git add $@; }; f"
         theirs = "!f() { git co --theirs $@ && git add $@; }; f"
         backup = "!git archive --format zip -o $(git rev-parse --show-toplevel | sed -e 's#/.*/##')-$(git rev-parse --abbrev-ref HEAD)-$(date +"%Y-%m-%d.%H-%M-%S").zip $(git rev-parse --abbrev-ref HEAD)"
-        sync = "!f() { git fetch $1; git merge --ff-only $1/$2; }; f"
+        msync = "!f() { git fetch upstream; git merge --ff-only upstream/master; }; f"
+        history = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
         # shortcuts
         cp = cherry-pick
@@ -82,13 +86,14 @@
         pull-all = !"for b in $(git for-each-ref refs/heads --format='%(refname)') ; do git checkout ${b#refs/heads/} ; git pull --ff-only ; done"
 
         ignored = !git ls-files -v | grep "^[[:lower:]]"
+        set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 
 
 [difftool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
@@ -99,3 +104,5 @@
 	default = simple
 [credential]
 	helper = cache
+[commit]
+	template = /Users/leafnode/.stCommitMsg
