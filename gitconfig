@@ -11,6 +11,7 @@
 	autocrlf = input
 	excludesfile = /Users/leafnode/.gitignore_global
         editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [receive]
         denyCurrentBranch = warn
 [github]
@@ -106,3 +107,17 @@
 	helper = cache
 [commit]
 	template = /Users/leafnode/.stCommitMsg
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	markEmptyLines = true
