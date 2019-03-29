@@ -4,7 +4,11 @@ ORG_DIR=`pwd`
 
 for i in zshrc vimrc vim gvimrc screenrc tmux.conf gitconfig irssi ansible.cfg
 do
-   rm -r -f $HOME/.$i
+   if [ -f $HOME/.$i ]
+   then
+      echo "File .$i already exists, making backup copy"
+      mv $HOME/.$i $HOME/.$i.bak-`date +"%Y%m%d%H%M%S"`
+   fi
    ln -s $ORG_DIR/$i $HOME/.$i
 done
 
