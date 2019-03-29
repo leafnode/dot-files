@@ -39,7 +39,6 @@
         f = "!git ls-files | grep -i"
         grep = grep -Ii
         gr = grep -Ii
-        sync = "!f() { git fetch $1; git merge --ff-only $1/$2; }; f"
         gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
         la = "!git config -l | grep alias | cut -c 7-"
         done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
@@ -53,8 +52,9 @@
         ours = "!f() { git co --ours $@ && git add $@; }; f"
         theirs = "!f() { git co --theirs $@ && git add $@; }; f"
         backup = "!git archive --format zip -o $(git rev-parse --show-toplevel | sed -e 's#/.*/##')-$(git rev-parse --abbrev-ref HEAD)-$(date +"%Y-%m-%d.%H-%M-%S").zip $(git rev-parse --abbrev-ref HEAD)"
-        msync = "!f() { git fetch upstream; git merge --ff-only upstream/master; }; f"
         history = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
+        sync = "!f() { git fetch $1; git merge --ff-only $1/$2; }; f"
+        msync = "!f() { git fetch upstream; git merge --ff-only upstream/master; }; f"
 
         # shortcuts
         cp = cherry-pick
@@ -121,3 +121,8 @@
 	whitespace = red reverse
 [diff-so-fancy]
 	markEmptyLines = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
