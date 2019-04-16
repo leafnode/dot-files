@@ -60,6 +60,12 @@ issues with color files, but that's something different.
   not sure)
 * [scss-syntax.vim](https://github.com/cakebaker/scss-syntax.vim) - scss syntax
 
+= Packages to be installed
+
+* zsh syntax highlighting
+* zsh autosuggestions
+* fuzzy finder
+
 = To do
 
 * create Rake-style installation script, like in [Janus](https://github.com/carlhuda/janus)
