@@ -64,7 +64,9 @@ issues with color files, but that's something different.
 
 * zsh syntax highlighting
 * zsh autosuggestions
+* fasd
 * fuzzy finder
+* for zsh+ohmyzsh - powerline9k theme
 
 = To do
 
