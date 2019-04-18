@@ -21,6 +21,8 @@ alias vi='vim'
 
 alias k='kubectl'
 alias ncdu='ncdu --color=dark'
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
 
 # ls
 
