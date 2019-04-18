@@ -19,6 +19,9 @@ alias v='vim'
 alias vi='vim'
 # alias gvim='gvim.gnome'
 
+alias k='kubectl'
+alias ncdu='ncdu --color=dark'
+
 # ls
 
 if [ "x`uname`" = "xDarwin" ]
