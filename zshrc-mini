@@ -259,4 +259,30 @@ ulimit -c 5120 2> /dev/null
 
 #echo -ne '\033(K'
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/lkrupinski/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lkrupinski/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/lkrupinski/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lkrupinski/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
+fasd_path=`which fasd`
+if [ $? -eq 0 ]
+then
+   eval "$(fasd --init auto)"
+fi
+
+bat_path=`which bat`
+if [ $? -eq 0 ]
+then
+   alias cat=$bat_path
+fi
+
+export FZFZ_RECENT_DIRS_TOOL="fasd"
+
 . ~/.zshrc_private
