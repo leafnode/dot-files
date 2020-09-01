@@ -88,7 +88,7 @@
 
         ignored = !git ls-files -v | grep "^[[:lower:]]"
         set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
-
+        restore-deleted = !git ls-files -d | xargs git checkout --
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
