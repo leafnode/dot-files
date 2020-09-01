@@ -1,5 +1,21 @@
 = Leafnode's dot-files
 
+== TODO
+
+In setup:
+* download ohmyzsh
+* download ohmyzsh custom themes (powerline9k) and plugins (fzf-z, zsh-autosuggestions)
+* link ohmyzsh zshrc file
+* fix backspace in vim with iTerm2's easy keybindings
+* install iTerm2 shell integration (maybe on choice)
+* use Ansible to install software
+* use templating for places like email account for Git config
+
+Also:
+* update README
+
+== README
+
 Configuration files in this repository are the effect of many hours of
 research, googling and copy&paste.
 
@@ -27,6 +43,7 @@ issues with color files, but that's something different.
 
 == screen features
 * bottom status bar in few variants
+* replace screen with tmux?
 
 == ViM features
 
