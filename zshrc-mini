@@ -260,10 +260,10 @@ ulimit -c 5120 2> /dev/null
 #echo -ne '\033(K'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lkrupinski/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lkrupinski/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/lkrupinski/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lkrupinski/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -277,12 +277,61 @@ then
    eval "$(fasd --init auto)"
 fi
 
+export FZFZ_RECENT_DIRS_TOOL="fasd"
+
 bat_path=`which bat`
 if [ $? -eq 0 ]
 then
-   alias cat=$bat_path
+   alias cat="$bat_path"
+   export AWS_PAGER="bat"
 fi
 
-export FZFZ_RECENT_DIRS_TOOL="fasd"
+GO_BIN=`which go`
+if [ $? -eq 0 ]
+then
+   export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
+# Kubernetes helpers
+
+alias k="kubectl"
+
+function kns() {
+   if [ $# -eq 1 ]
+   then
+      echo "Switching kubernetes namespace to $1"
+      CONTEXT=$(kubectl config current-context)
+      kubectl config set-context $CONTEXT --namespace=$1 > /dev/null
+   else
+      kubectl config current-context
+   fi
+}
+
+function ksh() {
+   if [ $# -eq 1 ]
+   then
+      kubectl exec -it $1 -- /bin/sh
+   fi
+}
+
+function k_kind() {
+   kubectl config set-context kind-kind
+}
+
+function kube-toggle() {
+  if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
+    unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
+  else
+    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+  fi
+  p10k reload
+  if zle; then
+    zle push-input
+    zle accept-line
+  fi
+}
+
+zle -N kube-toggle
+bindkey '^]' kube-toggle  # ctrl-] to toggle kubecontext in powerlevel10k prompt
 
 . ~/.zshrc_private
