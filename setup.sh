@@ -2,7 +2,7 @@
 
 ORG_DIR=`pwd`
 
-for i in zshrc vimrc vim gvimrc screenrc tmux.conf gitconfig irssi ansible.cfg p10k.zsh
+for i in zshrc vimrc vim gvimrc screenrc tmux.conf gitconfig irssi ansible.cfg p10k.zsh iterm2_shell_integration.zsh
 do
    if [ -f $HOME/.$i ]
    then
