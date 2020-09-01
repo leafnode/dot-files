@@ -35,3 +35,9 @@ then
    echo "NO CTAGS INSTALLED"
 fi
 
+if [ "x`uname`" = "xDarwin" ]
+then
+   mkdir -p $HOME/Pictures/screenshots
+   defaults write com.apple.screencapture location $HOME/Pictures/screenshots
+   killall SystemUIServer
+fi
