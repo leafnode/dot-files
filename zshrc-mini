@@ -1,3 +1,6 @@
+
+UNAME=`uname`
+
 ################################################################################
 ## Aliases
 ################################################################################
@@ -68,6 +71,12 @@ export CVS_RSH='ssh'
 export EDITOR='vim'
 export SCREENDIR="$HOME/tmp/screen"
 export PATH="$HOME/bin:/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
+
+if [ "x$UNAME" = "xDarwin" ]
+then
+   export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+fi
+
 path=($path $HOME/bin:/usr/local/bin)
 export HISTFILE="$HOME/.history"
 export HISTSIZE="10000"
@@ -94,7 +103,6 @@ export LANG=en_US.UTF-8
 #    export LANG=pl_PL
 #fi
 
-UNAME=`uname`
 if [ "x$UNAME" = "xDarwin" ]
 then
    unset LC_CTYPE
