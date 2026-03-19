@@ -23,8 +23,7 @@ alias vi='vim'
 # alias gvim='gvim.gnome'
 
 alias k='kubectl'
-alias ncdu='ncdu --color=dark'
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 
 # ls
@@ -70,7 +69,7 @@ export HOSTNAME=`/bin/hostname`
 export CVS_RSH='ssh'
 export EDITOR='vim'
 export SCREENDIR="$HOME/tmp/screen"
-export PATH="$HOME/bin:/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
+export PATH="/opt/homebrew/opt/openjdk/bin:$HOME/bin:/usr/local/bin:$PATH:/usr/X11R6/bin:/usr/sbin:/sbin:/usr/games"
 
 if [ "x$UNAME" = "xDarwin" ]
 then
@@ -290,6 +289,10 @@ fi
 [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
+[ -f $HOME/.cargo/env ] && . "$HOME/.cargo/env"
+
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 fasd_path=`which fasd`
 if [ $? -eq 0 ]
